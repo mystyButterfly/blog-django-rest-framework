@@ -1,0 +1,90 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="container">
+<center><h1><b>Blog-Django-API</b></h1></center>
+<h3>
+  This is a Django REST Framework project. On the home page, you can learn more about the project. The main focus of the project is the API. Visit the <a style="display:inline" href="/api/">API root list of endpoints</a> to see all URLs and their allowed methods. You will need Postman or another tool to make API requests using different methods. Some URLs require login. The token can be sent in the headers or in the authorization field (in Postman). You can view all registered users on this page below. You can visit the GET URLs by clicking the links provided below.
+</h3>
+<section>
+  <h2>Techonology:</h2>
+  <ul>
+    <li>Python</li>
+    <li>Django Rest Framework (DRF)</li>
+    <li>JWT Authentication (Simple JWT - library)</li>
+    <li>SQLite</li>
+    <li>Unit Tests</li>
+  </ul>
+</section>
+<section>
+  <h2>Functions</h2>
+  <ol>
+    <li>
+      <strong>User Authentication:</strong> Register and log in users with JWT tokens for secure authentication. You can paste the token in the headers. You can also refresh the token to obtain a new access token.
+    </li>
+    <li>
+      <strong>CRUD Operations:</strong> Create, read, update, and delete blog
+      posts, comments, authors.
+    </li>
+    <li>
+      <strong>Comments:</strong> Users can comment on posts, and comments are
+      linked to specific posts and authors.
+    </li>
+    <li>
+      <strong>Search and Ordering:</strong> Filter and sort posts by title or
+      body content.
+    </li>
+    <li>
+      <strong>Rate Limiting:</strong> Limits for unauthenticated users to
+      prevent abuse.
+    </li>
+    <li>
+      <strong>Pagination:</strong> Get posts in paginated format to handle large
+      datasets efficiently.
+    </li>
+    <li>
+      <strong>Admin Interface:</strong> Easy management of posts, authors, and
+      comments through Django’s built-in admin interface.
+    </li>
+  </ol>
+</section>
+<section>
+    <h2>List of users:</h2>
+    {% for user in users %}
+<h2>{{ user.username }}</h2>
+{% empty%}
+<h2 class="no-users">No users</h2>
+{% endfor %}
+</section>
+
+<section>
+<h2>
+  Change number in URL in your brouser after <l>?id=</l> to get another elements
+</h2>
+<div>
+  <a href="/api/">API root list of endpoints</a><br />
+  <a href="/api/posts/">Get all posts</a><br />
+  <a href="/api/post/?id=1">Get post by ID</a><br />
+  <a href="/api/authors/">Get all authors</a><br />
+  <a href="/api/authors/?id=3">Get author by ID</a><br />
+  <a href="/api/authors/posts/?id=1">Get posts by author ID</a><br />
+  <a href="/api/comments/">Get all comments</a><br />
+  <a href="/api/comment/?id=1">Get detail about certain comment by ID</a><br />
+  <a href="/api/page/?id=1">Get post with comments by ID</a><br />
+
+  <!-- Using Viewset for Comments -->
+  <a href="/api/comments/">List all comments (using viewset)</a><br />
+
+  <!-- Query Filters -->
+  <a href="/api/posts/?search=some">Handle posts search</a><br />
+  <a href="/api/posts/?ordering=title">Handle posts ordering</a><br />
+  <a href="/api/posts/?ordering=-title&search=first"
+    >Handle posts reverse ordering and search</a
+  ><br />
+  <a href="/api/posts/?limit=5&offset=2"
+    >Handle pagination with limit and offset</a
+  ><br />
+</div>
+</section>
+
+</div>
+{% endblock %}
